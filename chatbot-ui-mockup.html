@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gracywoods</title>
+    <style>
+      :root {
+        --clr-primary: #1d7bbd;
+        --clr-light: #f5f5f5;
+        --clr-dark: #212121;
+        --clr-shadow: rgba(109, 109, 109, 0.5);
+        --clr-bg: #f5f5f5;
+        --clr-input: #212121;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--clr-shadow);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--clr-primary);
+      }
+
+      .main-container {
+        width: 100dvw;
+        max-width: 100%;
+        height: 100dvh;
+        max-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--clr-primary);
+      }
+
+      .chatbot-bg {
+        width: 30dvw;
+        max-width: 30%;
+        height: 80dvh;
+        max-height: 80%;
+        border-radius: 20px;
+        border: 3px solid var(--clr-shadow);
+        background-color: var(--clr-light);
+        color: var(--clr-dark);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .chat-interface-header {
+        padding: 0.5rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        height: 10%;
+        max-height: 10%;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        background-color: var(--clr-primary);
+        color: var(--clr-light);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .chatbot-profile-div {
+        width: 40%;
+        max-width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+      }
+
+      .icon-div {
+        padding: 0.3rem;
+        width: 40px;
+        height: 40px;
+        background-color: var(--clr-light);
+        border-radius: 50%;
+        text-align: center;
+      }
+
+      .bot-icon {
+        font-size: 1.25rem;
+      }
+
+      .chat-interface-bg {
+        padding: 1rem;
+        width: 100%;
+        max-width: 100%;
+        height: 80%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        gap: 1rem;
+        overflow-y: auto;
+        background-color: var(--clr-bg);
+      }
+
+      .message-div {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .username {
+        margin: 0.25rem 0.5rem;
+        font-weight: 700;
+        font-size: clamp(8px, 10px + 1vw, 12px);
+        color: var(--clr-shadow);
+        font-weight: 600;
+      }
+
+      .message {
+        padding: 0.75rem 1rem;
+        min-width: 25%;
+        max-width: 60%;
+        border-radius: 25px;
+        font-size: clamp(8px, 10px + 1vw, 12px);
+        color: var(--clr-light);
+        background-color: var(--clr-primary);
+        word-wrap: break-word;
+      }
+
+      .prompt-interface-bg {
+        padding: 0.5rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        height: 10%;
+        max-height: 10%;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: var(--clr-bg);
+      }
+
+      .text-input {
+        width: 80%;
+        border-radius: 6px;
+        padding: 0.5rem 1rem;
+        color: var(--clr-input);
+        border: 2px solid var(--clr-shadow);
+        background-color: var(--clr-white);
+        outline-color: var(--clr-primary);
+      }
+
+      :is(.btn, .themeBtn) {
+        width: 15%;
+        border-radius: 6px;
+        padding: 0.5rem 0;
+        font-size: clamp(10px, 12px + 1vw, 14px);
+        border: 2px solid var(--clr-primary);
+        background-color: var(--clr-primary);
+        color: var(--clr-light);
+        transform: scale(1);
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .themeBtn {
+        width: auto;
+        padding: 0.5rem;
+        font-size: clamp(8px, 8px + 1vw, 10px);
+        border: 2px solid var(--clr-light);
+      }
+
+      .btn:hover {
+        background-color: transparent;
+        color: var(--clr-primary);
+      }
+
+      .btn:active {
+        transform: scale(0.9);
+      }
+
+      @media screen and (max-width: 500px) {
+        .chatbot-bg {
+          width: 90%;
+          max-width: 90%;
+        }
+      }
+
+      @media screen and (min-width: 501px) and (max-width: 1024px) {
+        .chatbot-bg {
+          width: 50%;
+          max-width: 50%;
+        }
+      }
+
+      @media screen and (min-width: 1024px) {
+        .chatbot-bg {
+          width: 40%;
+          max-width: 40%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="main-container">
+      <section class="chatbot-bg">
+        <header class="chat-interface-header">
+          <div class="chatbot-profile-div">
+            <div class="icon-div">
+              <span class="bot-icon">🤖</span>
+            </div>
+            <h4>Chatbot</h4>
+          </div>
+          <div class="theme-div">
+            <button type="button" id="themeBtn" class="themeBtn" value="light">
+              Switch theme
+            </button>
+          </div>
+        </header>
+        <section class="chat-interface-bg" id="chat-interface-bg"></section>
+        <section class="prompt-interface-bg">
+          <input
+            type="text"
+            class="text-input"
+            name="message"
+            id="formInput"
+            placeholder="Share your thoughts..."
+          />
+          <button type="submit" class="btn" id="submitBtn">Send</button>
+        </section>
+      </section>
+    </main>
+  </body>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const chatbox = document.getElementById("chat-interface-bg");
+      const theme = document.getElementById("themeBtn");
+
+      const formInput = document.getElementById("formInput");
+      const btn = document.getElementById("submitBtn");
+
+      window.addEventListener("load", () => {
+        addMsg("Bot", "Hello! How can I help you today?");
+      });
+
+      btn.addEventListener("click", sendMessage);
+      theme.addEventListener("click", changeTheme);
+
+      function changeTheme() {
+        if (theme.value === "light") {
+          document.documentElement.style.setProperty("--clr-input", "#f5f5f5");
+          document.documentElement.style.setProperty("--clr-bg", "#212121");
+          theme.value = "dark";
+        } else if (theme.value === "dark") {
+          document.documentElement.style.setProperty("--clr-input", "#212121");
+          document.documentElement.style.setProperty("--clr-bg", "#f5f5f5");
+          theme.value = "light";
+        }
+      }
+
+      function sendMessage() {
+        const message = formInput.value.trim();
+
+        //if message is empty then return without doing anything.
+        if (message === "") return;
+
+        //if message consists then add it into DOM
+        addMsg("You", message);
+
+        //Empty the form input value after the message is send
+        formInput.value = "";
+
+        /** Bot static reply for every user's message after
+         * some delay for the better user experience **/
+        setTimeout(
+          () =>
+            addMsg(
+              "Bot",
+              "Thanks for asking! I'm still learning, but I'll try to get better."
+            ),
+          1000
+        );
+
+        // Scroll to bottom whenver the new messages add to the chat interface
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }
+
+      function addMsg(sender, message) {
+        const time = new Date().toLocaleTimeString();
+
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "message-div";
+
+        if (sender == "You") {
+          messageDiv.style.alignItems = "flex-end";
+        }
+
+        const messageSpan = document.createElement("span");
+        messageSpan.className = "message";
+        messageSpan.textContent = message;
+        // console.log(messageSpan);
+
+        const usernameSpan = document.createElement("span");
+        usernameSpan.className = "username";
+        usernameSpan.textContent = `${sender} - ${time}`;
+        // console.log(usernameSpan);
+
+        messageDiv.appendChild(messageSpan);
+        messageDiv.appendChild(usernameSpan);
+        // console.log(messageDiv);
+
+        chatbox.appendChild(messageDiv);
+      }
+    });
+  </script>
+</html>
